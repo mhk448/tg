@@ -1550,8 +1550,8 @@ void do_load_user_photo2  (struct command *command, int arg_num, struct arg args
   //ID.peer_type = type;
   //ID.access_hash = 0;
   
-  tgl_peer_t *P = tgl_peer_get_by_name (TLS, args[0].str); 
-  //tgl_peer_t *P = tgl_peer_get (TLS, (int) args[0].num);
+  //tgl_peer_t *P = tgl_peer_get_by_name (TLS, args[0].str); 
+  tgl_peer_t *P = tgl_peer_get (TLS, (int) atoi(args[0].str));
   if (P) {
     tgl_do_load_file_location (TLS, &P->user.photo_big, print_filename_gw, ev);
   } else {
