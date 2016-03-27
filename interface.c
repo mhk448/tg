@@ -1551,7 +1551,7 @@ void do_load_user_photo2  (struct command *command, int arg_num, struct arg args
   //ID.access_hash = 0;
   int r=(int) atoi(args[0].str);
   //tgl_peer_t *P = tgl_peer_get_by_name (TLS, args[0].str); 
-  tgl_peer_t *P = tgl_peer_get (TLS, tgl_set_peer_id (TGL_PEER_USER, r);
+  tgl_peer_t *P = tgl_peer_get (TLS, tgl_set_peer_id (TGL_PEER_USER, r));
   if (P) {
     tgl_do_load_file_location (TLS, &P->user.photo_big, print_filename_gw, ev);
   } else {
