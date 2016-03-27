@@ -1545,8 +1545,11 @@ void do_load_user_photo  (struct command *command, int arg_num, struct arg args[
 void do_load_user_photo2  (struct command *command, int arg_num, struct arg args[], struct in_ev *ev) {
   assert (arg_num == 1);
   if (ev) { ev->refcnt ++; }
-
-  tgl_peer_t *P = tgl_peer_get (TLS, args[0].num);
+  //tgl_peer_id_t ID;
+  //ID.peer_id ;
+  //ID.peer_type = type;
+  //ID.access_hash = 0;
+  tgl_peer_t *P = tgl_peer_get (TLS, (int) args[0].num);
   if (P) {
     tgl_do_load_file_location (TLS, &P->user.photo_big, print_filename_gw, ev);
   } else {
