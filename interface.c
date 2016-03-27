@@ -1542,6 +1542,17 @@ void do_load_user_photo  (struct command *command, int arg_num, struct arg args[
     print_filename_gw (TLS, ev, 0, NULL);
   }
 }
+void do_load_user_photo2  (struct command *command, int arg_num, struct arg args[], struct in_ev *ev) {
+  assert (arg_num == 1);
+  if (ev) { ev->refcnt ++; }
+
+  tgl_peer_t *P = tgl_peer_get (TLS, args[0].num);
+  if (P) {
+    tgl_do_load_file_location (TLS, &P->user.photo_big, print_filename_gw, ev);
+  } else {
+    print_filename_gw (TLS, ev, 0, NULL);
+  }
+}
 
 void do_view_user_photo  (struct command *command, int arg_num, struct arg args[], struct in_ev *ev) {
   assert (arg_num == 1);
@@ -1705,6 +1716,7 @@ struct command commands[MAX_COMMANDS_SIZE] = {
   {"load_file_thumb", {ca_msg_id, ca_none}, do_load_file_thumb, "load_file_thumb <msg-id>\tDownloads file to downloads dirs. Prints file name after download end", NULL},
   {"load_photo", {ca_msg_id, ca_none}, do_load_photo, "load_photo <msg-id>\tDownloads file to downloads dirs. Prints file name after download end", NULL},
   {"load_user_photo", {ca_user, ca_none}, do_load_user_photo, "load_user_photo <user>\tDownloads file to downloads dirs. Prints file name after download end", NULL},
+  {"load_user_photo2", {ca_number, ca_none}, do_load_user_photo2, "load_user_photo2 <user>\tDownloads file to downloads dirs2. Prints file name after download end2", NULL},
   {"load_video", {ca_msg_id, ca_none}, do_load_video, "load_video <msg-id>\tDownloads file to downloads dirs. Prints file name after download end", NULL},
   {"load_video_thumb", {ca_msg_id, ca_none}, do_load_video_thumb, "load_video_thumb <msg-id>\tDownloads file to downloads dirs. Prints file name after download end", NULL},
   {"main_session", {ca_none}, do_main_session, "main_session\tSends updates to this connection (or terminal). Useful only with listening socket", NULL},
